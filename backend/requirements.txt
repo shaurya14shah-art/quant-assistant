@@ -1,0 +1,11 @@
+fastapi
+uvicorn
+yfinance
+pandas
+numpy
+scipy
+google-genai
+scikit-learn
+arch
+statsmodels
+PyWavelets

@@ -1,0 +1,135 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap');
+
+@import "tailwindcss";
+
+@theme {
+  --color-bg-primary: #000000;
+  --color-bg-secondary: #050505;
+  --color-bg-tertiary: #0a0a0a;
+  
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #aaaaaa;
+  --color-text-muted: #555555;
+  
+  --animate-float: float 12s ease-in-out infinite;
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(1deg); }
+  }
+}
+
+:root {
+  --bg-color: #000000; 
+  --bg-alt: #050505;
+  --text-main: #ffffff;
+  --text-dim: #888888;
+  --text-sub: #444444;
+  
+  --glass-bg: rgba(0, 0, 0, 0.6);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  
+  --card-bg: rgba(10, 10, 10, 0.5);
+  --card-border: rgba(255, 255, 255, 0.05);
+  --card-hover-border: rgba(255, 255, 255, 0.2);
+  
+  --accent-primary: #8b5cf6; /* violet-500 */
+  --accent-secondary: #06b6d4; /* cyan-500 */
+  --accent-success: #10b981; /* emerald-500 */
+  --accent-warning: #f59e0b; /* amber-500 */
+  --accent-danger: #ef4444; /* red-500 */
+  
+  --accent-color: #ffffff;
+  --danger-color: #ef4444;
+  --primary-btn: #ffffff;
+  --primary-btn-text: #000000;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* ENFORCE ABSOLUTE MONOCHROME */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  color: var(--text-main);
+}
+
+/* Cinematic Scrolling */
+.scroll-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  z-index: 10;
+}
+
+/* Scroll Animations */
+.scroll-section {
+  width: 100%;
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 4rem 2rem;
+  
+  /* Initial state before entering viewport */
+  opacity: 0;
+  transform: translateY(100px);
+  filter: blur(10px);
+  transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.scroll-section.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+
+/* Components */
+@layer components {
+  .glass-panel {
+    @apply bg-[var(--card-bg)] border border-[var(--card-border)] rounded-2xl shadow-2xl transition-all duration-500 backdrop-blur-3xl;
+  }
+  
+  .glass-panel:hover {
+    @apply border-[var(--card-hover-border)] shadow-[0_10px_40px_rgba(255,255,255,0.15)] -translate-y-1;
+  }
+  
+  .btn {
+    @apply inline-flex items-center justify-center px-10 py-5 text-sm font-extrabold rounded-full transition-all duration-300 cursor-pointer border uppercase tracking-[0.2em];
+    font-family: 'Outfit', sans-serif;
+  }
+  
+  .btn-primary {
+    @apply bg-[var(--primary-btn)] text-[var(--primary-btn-text)] border-transparent hover:-translate-y-1 active:translate-y-1 hover:shadow-[0_0_30px_rgba(255,255,255,0.4)] shadow-[0_0_10px_rgba(255,255,255,0.1)];
+  }
+}
+
+/* Recharts overrides to ensure axis text and lines are visible on dark background */
+.recharts-cartesian-axis-tick-value {
+  fill: #ffffff !important;
+}
+.recharts-cartesian-axis-line {
+  stroke: rgba(255, 255, 255, 0.5) !important;
+}
+.recharts-cartesian-grid-horizontal line, .recharts-cartesian-grid-vertical line {
+  stroke: rgba(255, 255, 255, 0.1) !important;
+}
