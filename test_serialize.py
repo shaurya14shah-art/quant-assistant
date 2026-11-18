@@ -1,5 +1,5 @@
 import sys
-sys.path.append("/Users/shauryashah/AG/QuantAssistant/backend")
+sys.path.append("/Users/USER/AG/QuantAssistant/backend")
 from fastapi.testclient import TestClient
 from main import app
 import traceback
